@@ -9,30 +9,35 @@ that you would like to unpack into a collection of N-variables.
 
 (X_1,X_2,....X_n) -> x,y,...z
 """
-
+print('*********')
 p = (4, 5)      # TUPLE
 x, y = p        # Tuple unpacking
-print(f" x = {x} \n y = {y}")
+print('x = ' + str(x),'\ny = ' + str(y)+ '\n')
 
-data = ['ACME', 50, 91.1, (2012,  12,  21) ]  # LIST of various object types
-name, share, price, (year, mon, day) = data   # Unpacking list to variables
+print('\n*********')
+data = ['ACME', 50, 91.10, (2012, 12, 21), 'junk']  # LIST of various object types
+name, share, price, (year, mon, day), _ = data   # Unpacking list to variables
 print(f"""
 Name: {name}
 Share: {share}
-Price: {price}
 Date: {mon}-{day}-{year}
-""")
+Price: $%.2f
+""" % price)
 
-# Unpacking iterable with throw away variable _
-_, shares, price, _ = data
-
-#               1.2 Upacking iterables of unknown length
+# 1.2 Unpacking Elements from Iterables of Arbitrary Length
 """
 Problem: Unpacks ITERABLES with unknown length
 """
+print('\n*********')
+grades = sorted([70, 77, 88, 99, 100, 50])
+low, *middle, high = grades
+print(f'Low Score: {low}\nHigh Score: {high}')
+
+print('\n*********')
 from statistics import mean     # Import mean function from statistics module
 
 # Defines function that drops the first / last grade and returns mean of grades
+print('\n*********')
 def drop_first_last(grades):
     first, *middle, last = grades
     return (mean(middle))
@@ -40,11 +45,13 @@ def drop_first_last(grades):
 drop_first_last([1,2,2,2,1] )   # Call function to return "middle" mean of grades
 
 #   Unpacks first var and last tuple variable, remaing is thrown away to  _
+print('\n*********')
 name, *_,  (*_, year) = data
 print(year)
 
 #   Unpacks ":" delimited string to variables
-line = "nobody:*:-2:2:Unpriviliged User:/var/empty:/usr/bin/false"
+print('\n*********')
+line =  'user_name:*:-2:-1:Unprivileged User:/var/empty:/usr/bin/false'
 uname, *fields, homedir, sh= line.split(":")
 print(f"""
 {uname}      nobody
@@ -59,10 +66,17 @@ print(f"""
 You want yo keep a limited history of the last few items seen during iterations or during some
 other kind of processing.
 """
-
+print('\n*********')
 # Imports deque function from collections
 from collections import deque
+q = deque(maxlen=3)
+q.append(1)
+q.append(2)
+q.append(3)
+q.append(4)
+print(f'Queue: {q}')
 
+print('\n*********')
 # defines function with lines, patterm, history defaulted to 5 as input
 def search(lines, pattern, history = 5):
     previous_lines = deque(maxlen=history)
@@ -79,3 +93,26 @@ if  __name__ == '__main__':
                 print(pline, end="")
                 print(line, end="")
                 print('-'*20)
+                
+# 1.4 Finding the Large or Smallest N Items
+# priority queue algorithm
+print('\n*********')
+import heapq
+
+nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2]
+print('Largest 3: ', heapq.nlargest(3, nums))
+print('Smallest 3:', heapq.nsmallest(3, nums))
+
+print('\n*********')
+# import heapq
+
+portfolio = [
+  {'name': 'IBM', 'shares': 100, 'price': 91.1},
+  {'name': 'AAPL', 'shares': 50, 'price': 543.22},
+  {'name': 'FB', 'shares': 200, 'price': 21.09},
+  {'name': 'HPQ', 'shares': 35, 'price': 31.75}]
+
+cheap = heapq.nsmallest(1, portfolio, key=lambda s: s['price'])
+print(f'Cheap Stock: {cheap}')
+expensive = heapq.nlargest(1, portfolio, key=lambda s: s['price'])
+print(f'Expensive Stock: {expensive}')
