@@ -1,5 +1,5 @@
 #               Python Cookbook
-#               http://www.dabeaz.com/CookbookTOC.pdf
+#               https://d.cxcore.net/Python/Python_Cookbook_3rd_Edition.pdf
 #               Chapter 1 - Data Structures and Algorithms
 
 #                1.1 Unpacking a SEQUENCE / LIST / ITERABLE into a separate variable
