@@ -155,20 +155,20 @@ class PriorityQueue:
 
     """
 
-  def __init__(self):
-      """ Init Method intialized local variables """
-      self._queue = []
-      self._index = 0  # Differentiates between objects with same priority
+def __init__(self):
+     """ Init Method intialized local variables """
+     self._queue = []
+     self._index = 0  # Differentiates between objects with same priority
 
-  def push(self, item, priority):
-     """ Push Method takes self, item, priority as input and adds to sorted queue"""
-     # (-)priority to reverse with highest priority first
-     heapq.heappush(self._queue, (-priority, self._index, item))
-     self._index += 1
+def push(self, item, priority):
+    """ Push Method takes self, item, priority as input and adds to sorted queue"""
+    # (-)priority to reverse with highest priority first
+    heapq.heappush(self._queue, (-priority, self._index, item))
+    self._index += 1
 
-  def pop(self):
-     """ Pop Method takes in self as input and returns the highest priority item in the queue """
-     return heapq.heappop(self._queue)[-1]
+def pop(self):
+    """ Pop Method takes in self as input and returns the highest priority item in the queue """
+    return heapq.heappop(self._queue)[-1]
 
 ###############################################
 #    1.6 Mapping Keys to Multiple Values in a Dictoionary aka MULTIDICTIONARY
@@ -281,14 +281,13 @@ c = {key:a[key] for key in a.keys() - {'z', 'w'}} # {'x': 1, 'y': 2}
 
 ###############################################
 # 1.10 Removing Duplicates from a Sequence while Maintaining Order
-
 def dedupe(items, key=None):
     seen = set()
     for item in items:
         val = item if key is None else key(item) # LISTS -> remove this line
         if val not in seen: #  LISTS -> val is replaced with item
             yield item
-            seen.add(val) LISTS -> val is replaced with item
+            seen.add(val) #LISTS -> val is replaced with item
 
 # a = [1, 5, 2, 1, 9, 1, 5, 10]
 # list(dedup(a)) #[1, 5, 2, 9, 10]
@@ -298,7 +297,29 @@ list(dedupe(a, key=lambda d: (d['x']))) # [{'x': 1, 'y': 2}, {'x': 2, 'y': 4}]
 
 # Converting LIST to SET accomblished dedup but at the cost of losing the Order
 
-# # By using a generator dedupe() can be used to remove duplicate lines
-# with open('test.txt', 'r+') as f:
-#     for line in depupe(f):
-#         print(line)
+# By using a generator dedupe() can be used to remove duplicate lines from a file
+
+# Input 1\n1\n2\n2\n3\n3\n4\n
+with open('test.txt', 'r') as f:
+    for line in dedupe(f):
+        print(line) # Output 1\n2\n3\n4\n
+
+##################################
+# 1.11 Naming a Slice
+# General Rule Code with hardcoded index values lead to readability and maintenance problems
+record = '..........................100             .................513.25   ...............'
+SHARES = slice(26,30) # creates a slice object to be used later
+PRICE = slice(60,67)
+cost = int(record[SHARES]) * float(record[PRICE]) # 1325.0
+
+string = '0123456'
+a = slice(1,50,4)
+b = slice(1,5,4)
+a.start #1
+a.stop #50
+a.step #4
+a.indices(len(string)) #(1, 7, 4) limited to end at 7 per string length
+b.indices(len(string)) #(1, 5, 4)
+
+##################################
+# 1.12 Determing the Most Frequently Occuring Items in a Sequence
