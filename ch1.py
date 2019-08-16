@@ -323,3 +323,56 @@ b.indices(len(string)) #(1, 5, 4)
 
 ##################################
 # 1.12 Determing the Most Frequently Occuring Items in a Sequence
+# Prefered method for tabulating / counting occurances in data
+# eg HISTOGRAMS
+words = ['look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eye',
+            'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
+              'eyes', "don't", 'look', 'around', 'the', 'eyes', 'look', 'into',
+              'my', 'eyes', "you're", 'under']
+
+# Counter can feed any hashable items
+from collections import Counter
+word_counts = Counter(words)
+word_counts # Counter({'look': 4, 'into': 3,'my': 3,'eyes': 7,....})
+top_three = word_counts.most_common(3)
+top_three  #[('eyes', 7), ('the', 5), ('look', 4)]
+
+# Updating the Counter object with another list
+more_words = ['why', 'are', 'you', 'not', 'looking', 'in', 'my', 'eyes']
+word_counts.update(more_words)
+
+# Under the hood of Counter is a dictionary that maps the items to their frequencies
+word_counts['blah'] +=1
+word_counts #Counter({'look': 4, ....'blah': 1})
+
+a = Counter(words)
+b = Counter(more_words)
+
+# Combined Counter Objects
+a+b # Counter({'look': 4, 'into': 3, 'my': 4,....
+
+# Subtract items
+a-b # Counter({'look': 4, 'into': 3, 'my': 2,...
+
+###########################
+# 1.13 Sorting a List of Dictionaries by common key
+
+rows = [
+                {'fname': 'Brian', 'lname': 'Jone', 'uid': 1003},
+                {'fname': 'David', 'lname': 'Beazly', 'uid': 1002},
+                {'fname': 'John', 'lname': 'Cleese', 'uid': 1001},
+                {'fname': 'Big', 'lname': 'Jones', 'uid': 1004},
+                ]
+
+from operator import itemgetter
+
+# Sorted by fname
+rows_by_fname = sorted(rows, key=itemgetter('fname'))
+# Sorted by lname first and then by fname
+rows_by_ln_fn= sorted(rows, key=itemgetter('lname', 'fname')) # itemgetter returns a tuple
+
+# lambda expression could be used instead of itemgetter but itemgetter is bit faster
+# key=lambda r: r['fname']
+
+# Min uid
+min(rows, key=itemgetter('uid'))
