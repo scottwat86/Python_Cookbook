@@ -1,4 +1,4 @@
-This project seeks to learn more of the about the Python programming tricks presented in:
+This project seeks to learn more about the Python programming tricks presented in:
 
  [Python Cookbook](https://d.cxcore.net/Python/Python_Cookbook_3rd_Edition.pdf)
 
