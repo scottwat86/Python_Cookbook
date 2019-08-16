@@ -3,6 +3,8 @@ This project seeks to learn more of the about the Python programming tricks pres
  [Python Cookbook](https://d.cxcore.net/Python/Python_Cookbook_3rd_Edition.pdf)
 
  by David Beazley and Brian K. Jones
+ 
+ ---  
 
  # Table of Contents:
 
